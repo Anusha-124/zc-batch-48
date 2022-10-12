@@ -1,0 +1,66 @@
+mealType
+
+content: "Start your day with exclusive breakfast options"
+image: "assets/breakfast.png"
+meal_type: 1
+name: "Breakfast"
+_id: "6307bc189b70a6dcc1cd9b7c"
+
+
+location
+
+city:"Delhi"
+city_id: 1
+country_name:"India"
+location_id:1
+name:"Shalimar Bagh"
+_id:"6307a0ef9b70a6dcc1cd9b6e"
+
+
+
+
+serchpage :-
+Filter:---
+
+city: "Delhi"
+cuisine: [{name: 'South Indian'}]
+locality: "Shalimar Bagh"
+min_price: 333
+name: "KFC"
+_id: "6305d8759b70a6dcc1cd9b60"
+
+
+aggregate_rating:0,
+city:""
+city_id:-1,
+contact_number:0,
+cuisine:[],
+cuisine_id:[],
+image:"",
+locality:"",
+location_id:-1,
+mealtype_id:-1
+min_price:0
+name:"",
+rating_text:"",
+thumb: [],
+_id:-1
+
+
+
+
+
+
+
+
+
+
+
+Hooks:--
+*useNaviagte()
+   ->to navigative 1 to other page
+   ->on navigation single page app apporch is follow
+
+   *useParams()
+     ->use params is used to get  dynamic url data
+     
