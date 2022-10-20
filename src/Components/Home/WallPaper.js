@@ -12,7 +12,7 @@ function WallPaper() {
 
     let getLocationList = async () => {
         try {
-            let response = await axios.get('http://localhost:5003/api/get-location')
+            let response = await axios.get('https://zc-batch-48-api-appliction.herokuapp.com/api/get-location')
             let data = response.data
             if (data.status === true) {
                 setLocationList([...data.result]);
@@ -31,7 +31,7 @@ function WallPaper() {
         if (value !== "") {
             console.log(value)
             try {
-                let url = "http://localhost:5003/api/get-restarant-by-location-id/" + value;
+                let url = "https://zc-batch-48-api-appliction.herokuapp.com/api/get-restarant-by-location-id/" + value;
                 let { data } = await axios.get(url);
                 console.log(data.result)
                 if (data.status == true) {
