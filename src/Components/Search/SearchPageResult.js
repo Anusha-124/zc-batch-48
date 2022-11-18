@@ -9,6 +9,7 @@ function SearchPageResult() {
     let [restaurentList, setRestaurantList] = useState([]);
     let [locationList, setLocationList] = useState([]);
     let [filter,setFilter] = useState({meal_type:meal_id,});
+    let [cuisine, setcuisine] = useState([]);
 
     let getLocationList = async () => {
         try {
@@ -43,6 +44,16 @@ function SearchPageResult() {
 
     };
     // console.log(restaurentList)
+    let cuisineadding = (value) => {
+        let index = cuisine.indexOf(Number(value));
+        if (index === -1) {
+          cuisine.unshift(Number(value));
+        } else {
+          cuisine.splice(index, 1);
+        }
+        setcuisine(cuisine);
+      };
+
 
    let makeFiltration =(event,type)=>{
     let value = event.target.value;
@@ -54,6 +65,16 @@ function SearchPageResult() {
         }else{
             delete _filter['location'] };
             break;
+            case "cuisine":
+                cuisineadding(value);
+                if (cuisine.length === 0) {
+                  delete _filter["cuisine"];
+                  break;
+                }
+                _filter["cuisine"] = cuisine;
+                break;
+
+
             case 'sort':
                  _filter['sort'] = Number(value);
                   break;
@@ -62,10 +83,16 @@ function SearchPageResult() {
                  _filter['lcost'] = Number(costForTwo[0]);
                  _filter['hcost'] = Number(costForTwo[1]);
                 break;
+         case 'page':
+            _filter["page"]=Number(value);
+            console.log(_filter);
+            break;
+       
     }
     console.log(_filter)
      setFilter({..._filter})
     filterOperation(_filter);
+
 
    }
 
@@ -221,7 +248,7 @@ function SearchPageResult() {
                                 }
                             </select>
                             {/* ================Cuisine */}
-                            <p className="left-section-headings">Cuisine</p>
+                            {/* <p className="left-section-headings">Cuisine</p>
                             <div className="form-check">
                                 <input className="form-check-input" type="checkbox" value="1" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
@@ -251,7 +278,74 @@ function SearchPageResult() {
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Street Food
                                 </label>
-                            </div>
+                            </div> */}
+
+<p className="mt-4 mb-2 fw-bold">Cuisine</p>
+              <div>
+                {/* <div className="py-2">Cuisine</div> */}
+                <div>
+                  <input
+                    value="1"
+                    onChange={(event) => makeFiltration(event, "cuisine")}
+                    id="North Indian"
+                    className="hand py-1 mx-2"
+                    type="checkbox"
+                  />
+                  <label htmlFor="North Indian" className="mx-2">
+                    North Indian
+                  </label>
+                </div>
+                <div>
+                  <input
+                    value="2"
+                    onChange={(event) => makeFiltration(event, "cuisine")}
+                    id="South Indian"
+                    className="hand py-1 mx-2"
+                    type="checkbox"
+                  />
+                  <label htmlFor="South Indian" className="mx-2">
+                    South Indian
+                  </label>
+                </div>
+                <div>
+                  <input
+                    value="3"
+                    onChange={(event) => makeFiltration(event, "cuisine")}
+                    id="Chinese"
+                    className="hand py-1 mx-2"
+                    type="checkbox"
+                  />
+                  <label htmlFor="Chinese" className="mx-2">
+                    Chinese
+                  </label>
+                </div>
+                <div>
+                  
+                  <input
+                    value="4"
+                    onChange={(event) => makeFiltration(event, "cuisine")}
+                    id="Fast Food"
+                    className="hand py-1 mx-2"
+                    type="checkbox"
+                  />
+                  <label htmlFor="Fast Food" className="mx-2">
+                    Fast Food
+                  </label>
+                </div>
+                <div>
+                  <input
+                    value="5"
+                    onChange={(event) => makeFiltration(event, "cuisine")}
+                    id="Street Food"
+                    className="hand py-1 mx-2"
+                    type="checkbox"
+                  />
+                  <label htmlFor="Street Food" className="mx-2">
+                    Street Food
+                  </label>
+                </div>
+              </div>
+
                             {/* ----------------Cost For Two */}
                             <p className="left-section-headings">Cost For Two</p>
                             <div className="form-check ms-1">
@@ -366,44 +460,16 @@ function SearchPageResult() {
 
                         }
 
-                        {/* <div className="card mt-3">
-                            <div className="mx-5 my-3">
-                                <div className="image-name d-flex ">
-                                    <div id="right-section-image">
-                                        <img src="/imges/assets/tiffen.png" alt="" />
-
-                                    </div>
-                                    <div className="ms-4">
-                                        <p className="shop-name card-title">The Big Chill Cakery</p>
-                                        <p className="place-type card-subtitle">FORT</p>
-                                        <p className="place-address card-text">
-                                            Shop 1, Plot D, Samruddhi Complex, Chincholi …
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <hr style={{color:"#D2D9E6"}} />
-                                <div className=" d-flex ">
-                                    <div className="cuisines-price-head me-5">
-                                        <h5>CUISINES:</h5>
-                                        <p>COST FOR TWO:</p>
-                                    </div>
-                                    <div className="cuisines-price-name">
-                                        <h5>Bakery</h5>
-                                        <p>₹700</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
+                       
 
                         {/* <!-- pagination elements --> */}
                         <div className="pagination_section text-center mt-5">
                             <a href="#" className="page-number">❮</a>
-                            <a href="#" title="Algorithm" className="page-number">1</a>
-                            <a href="#" title="DataStructure" className="page-number">2</a>
-                            <a href="#" title="Languages" className="page-number">3</a>
-                            <a href="#" title="Interview" className="active page-number">4</a>
-                            <a href="#" title="practice" className="page-number">5</a>
+                            <a href="#" title="Algorithm" className="page-number" onClick={(event)=>makeFiltration(event,"page")}>1 </a>
+                            <a href="#" title="DataStructure" className="page-number" onClick={(event)=>makeFiltration(event,"page")}>2</a>
+                            <a href="#" title="Languages" className="page-number" onClick={(event)=>makeFiltration(event,"page")}>3</a>
+                            <a href="#" title="Interview" className="active page-number" onClick={(event)=>makeFiltration(event,"page")}>4</a>
+                            <a href="#" title="practice" className="page-number"onClick={(event)=>makeFiltration(event,"page")}>5</a>
                             <a href="#" className="page-number">❯</a>
                         </div>
                     </div>
